@@ -3,7 +3,18 @@
     "description": "Library for interacting with Mouser APIs",
     "type": "library",
     "require": {
-        "guzzlehttp/guzzle": "^6.5"
+        "rtnatephp/http": "dev-master"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "git@github.com:rtnate/RTNatePHP-HTTP.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "RTNatePHP\\Mouser\\": "src"
+        }
     },
     "license": "MIT",
     "authors": [

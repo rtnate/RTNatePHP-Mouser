@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b9900ccfca82a0ce06372b7fa4631317",
+    "content-hash": "bdcecaf0380c4690a9edc9e5fd34c5df",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -284,12 +284,53 @@
             ],
             "description": "A polyfill for getallheaders.",
             "time": "2019-03-08T08:55:37+00:00"
+        },
+        {
+            "name": "rtnatephp/http",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rtnate/RTNatePHP-HTTP.git",
+                "reference": "d978a0c8b518958facb2a9c9c7e4b388a0ad229f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rtnate/RTNatePHP-HTTP/zipball/d978a0c8b518958facb2a9c9c7e4b388a0ad229f",
+                "reference": "d978a0c8b518958facb2a9c9c7e4b388a0ad229f",
+                "shasum": ""
+            },
+            "require": {
+                "guzzlehttp/guzzle": "^6.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "RTNatePHP\\HTTP\\": "src"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nate Taylor",
+                    "email": "nate@rtelectronix.com"
+                }
+            ],
+            "description": "Basic HTTP Request Wrapper using Guzzle/Client",
+            "support": {
+                "source": "https://github.com/rtnate/RTNatePHP-HTTP/tree/master",
+                "issues": "https://github.com/rtnate/RTNatePHP-HTTP/issues"
+            },
+            "time": "2020-04-13T20:54:03+00:00"
         }
     ],
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "rtnatephp/http": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": [],
