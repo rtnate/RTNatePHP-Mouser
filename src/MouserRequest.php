@@ -4,10 +4,10 @@ namespace RTNatePHP\Mouser;
 
 use GuzzleHttp\Client as Client;
 use Psr\Http\Message\ResponseInterface;
-use RTNatePHP\HTTP\ExternalRequest;
+use RTNatePHP\HTTP\RequestManager;
 use TypeError;
 
-class MouserRequest extends ExternalRequest{
+class MouserRequest extends RequestManager{
     
     protected $headers =    ['accept' => 'application/json',
                             'Content-type' => 'application/json'];

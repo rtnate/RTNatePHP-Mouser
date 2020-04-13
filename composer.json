@@ -1,0 +1,15 @@
+{
+    "name": "rtnatephp/mouser",
+    "description": "Library for interacting with Mouser APIs",
+    "type": "library",
+    "require": {
+        "guzzlehttp/guzzle": "^6.5"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nate Taylor",
+            "email": "nate@rtelectronix.com"
+        }
+    ]
+}
