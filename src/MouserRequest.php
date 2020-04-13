@@ -1,0 +1,78 @@
+<?php
+
+namespace RTNatePHP\Mouser;
+
+use GuzzleHttp\Client as Client;
+use Psr\Http\Message\ResponseInterface;
+use RTNatePHP\HTTP\ExternalRequest;
+use TypeError;
+
+class MouserRequest extends ExternalRequest{
+    
+    protected $headers =    ['accept' => 'application/json',
+                            'Content-type' => 'application/json'];
+
+    protected $reqMethod = 'GET';
+
+    /**
+     * Constructs a new MouserRequest Object
+     * 
+     * @param string $url - The request url
+     * @param string $apiKey - The Mouser API key to use with the request
+     * @param Client|null $client - The Client object to use for the request.
+     *                              If not supplied one will be created automatically.
+     */
+    public function __construct($url = '', $apiKey = '', $client = null)
+    {
+        $this->apiKey = $apiKey;
+        parent::__construct($url, $client);
+    }
+
+
+    public function setApiKey($apiKey)
+    {
+        $this->apiKey = $apiKey;
+    }
+
+    protected function getQueryString()
+    {
+        $this->query['apiKey'] = $this->apiKey;
+        return parent::getQueryString();
+    }
+
+    public function make($body = '')
+    {
+        if (!$this->apiKey)
+        {
+            throw new MouserException('Error: API Key Not supplied');
+        }
+        try{
+            return parent::make();
+        }
+        catch(\Throwable $e)
+        {
+            $message = "Mouser Unreachable: ".$e->getMessage();
+            throw new MouserException($message, $e->getCode(), $e);
+        }
+        return false;
+    }
+
+    public function getResponseData()
+    {
+        try{
+            if ($this->response instanceof ResponseInterface)
+            {
+                $body = $this->response->getBody()->getContents();
+                $data = json_decode($body, true);
+                return $data;
+            }
+            else return [];
+        }
+        catch(\Throwable $e)
+        {
+            $message = "Unable To Read Mouser Response: ".$e->getMessage();
+            throw new MouserException($message, $e->getCode(), $e);
+        }
+    }
+
+}
