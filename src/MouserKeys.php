@@ -2,16 +2,41 @@
 
 namespace RTNatePHP\Mouser;
 
-class MouserKeys
+/**
+ * Class which is called statically to retrieve Mouser api keys.
+ * 
+ * Default implementation: @see APIKeysDefault.
+ * Use setClass() to programmatically override the default implementation to use your class.
+ */
+class MouserKeys implements APIKeysInterface
 {
-    static public function search()
+    /**
+     * The class that provides the API Keys
+     */
+    static protected $keysClass = APIKeysDefault::class;
+
+    /**
+     * Programmatically set the class which provides the API Keys
+     * 
+     * @param string $newKeysClass A class name which implements APIKeysInterface
+     */
+    static public function setClass(string $newKeysClass)
     {
-        return env('MOUSER_SEARCH_API_KEY', '');
+        if (is_subclass_of(APIKeysInterface::class, $newKeysClass))
+        {
+            self::$keysClass = $newKeysClass;
+        }
     }
 
-    static public function orders()
+    static public function search(): string
     {
-        return env('MOUSER_ORDER_API_KEY', '');
+        return self::$keysClass::search();
     }
+
+    static public function orders():string
+    {
+        return self::$keysClass::orders();
+    }
+
 
 }

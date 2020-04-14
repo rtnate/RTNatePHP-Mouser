@@ -5,8 +5,10 @@ namespace RTNatePHP\Mouser;
 use GuzzleHttp\Client as Client;
 use Psr\Http\Message\ResponseInterface;
 use RTNatePHP\HTTP\RequestManager;
-use TypeError;
 
+/**
+ *  Extension of RequestManager for making HTTP Requests to Mouser
+ */
 class MouserRequest extends RequestManager{
     
     protected $headers =    ['accept' => 'application/json',
@@ -28,7 +30,11 @@ class MouserRequest extends RequestManager{
         parent::__construct($url, $client);
     }
 
-
+    /**
+     * Sets the API Key for this request
+     * 
+     * @param string $apiKey
+     */
     public function setApiKey($apiKey)
     {
         $this->apiKey = $apiKey;
@@ -36,10 +42,14 @@ class MouserRequest extends RequestManager{
 
     protected function getQueryString()
     {
+        //Add the apiKey to the query params before stringifying
         $this->query['apiKey'] = $this->apiKey;
         return parent::getQueryString();
     }
 
+    /**
+     * @throws MouserException on Missing API Key or request failure
+     */
     public function make($body = '')
     {
         if (!$this->apiKey)
@@ -57,6 +67,12 @@ class MouserRequest extends RequestManager{
         return false;
     }
 
+    /**
+     * Retrieves the Mouser response data
+     * 
+     * @return array An associative array with the response
+     * @throws MouserException on invalid data
+     */
     public function getResponseData()
     {
         try{
